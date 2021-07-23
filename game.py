@@ -26,15 +26,23 @@ def main():
     word_is = word()
     input_word=""
     underscore(word_is) 
-
     while "".join(wo_un) != word_is and input_word != word_is:
-        os.system("cls")
-        print("¡Adivina la palabra!\n")
-        print(" ".join(wo_un))        
+        if os.name == "nt":
+            os.system("cls")
+        else:
+            os.system("clear")
+        
+        if input_word.isnumeric():
+                print("Ingresa solo caracteres\n")
+        
+        print("¡Adivina la palabra!")
+        print("No olvides las tildes\n")
+        print(" ".join(wo_un).upper())              
         input_word = input("\nIngresa una letra: ")
         process(input_word,word_is)
-    
-    print(f"Correcto, la palabra es: {word_is}")
+        
+    os.system("cls")
+    print(f"¡Ganaste! La palabra es: {word_is.upper()}")
 
 if __name__ == "__main__":
     main()
