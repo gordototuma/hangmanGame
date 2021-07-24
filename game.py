@@ -1,3 +1,4 @@
+from math import exp
 import os
 import random
 
@@ -13,19 +14,28 @@ def process(input_word,word_is):
 
 def underscore(word_is):
     global wo_un
+    assert isinstance(word_is,str), "No se ha podido hallar la palabra para jugar"
     wo_un = ["_" for x in range(len(word_is))]
 
 
 def word():
     a = random.randint(0,171)
-    with open("./data.txt", "r", encoding="utf-8") as words:
-        return words.readlines()[a].replace("\n","")
+    try:
+        with open("./datas.txt", "r", encoding="utf-8") as words:
+            return words.readlines()[a].replace("\n","")
+    except FileNotFoundError:
+        print("Existe inconvenientes con el archivo data.txt")
 
 
 def main():
     word_is = word()
     input_word=""
-    underscore(word_is) 
+    try:
+        underscore(word_is) 
+    except AssertionError as e:
+        print(e)
+        exit()
+    
     while "".join(wo_un) != word_is and input_word != word_is:
         if os.name == "nt":
             os.system("cls")
